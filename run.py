@@ -1,7 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-import sys
-from termcolor import colored, cprint
+from termcolor import colored
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -47,7 +46,7 @@ def validate_user(choice):
             read_car_stock()
         elif choice == 2:
             print("\nYou chose staff")
-            update_car_stock()
+            new_car_stock()
         elif choice != 1 or 2:
             print(f"Please enter a valid input, you entered {choice}")
             return False
@@ -55,7 +54,17 @@ def validate_user(choice):
 
 
 def read_car_stock():
-    print(colored("hello", "red"))    
+    print(colored("Welcome to the Customer Section", "yellow"))
+    print(colored("We have a variety of Japanese Cars in stock", "yellow"))
+    
+
+def new_car_stock():
+    print(colored("Welcome to the Staff section", "blue"))
+    new_car = input(colored("Enter new car Manufacturer & Model): ", "blue"))
+    stock_addition = new_car.split()
+    print(f"You have successfully added {new_car}")
+    stock_worksheet = SHEET.worksheet("car_stock_sheet")
+    stock_worksheet.append_row(stock_addition)
 
 
 

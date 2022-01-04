@@ -24,7 +24,8 @@ def get_user_details():
     function to get the users status to run different functions depending
     """
     while True:
-        user = input("\nPlease enter '1' for Customer or '2' for Staff : ")
+        print("\nPlease choose from either Customer Section or Staff Section")
+        user = input("\n'1' for Customer Section | '2' for Staff Section : ")
         if validate_user(user):
             break
     return user
@@ -42,10 +43,8 @@ def validate_user(choice):
         return False
     else:
         if choice == 1:
-            print("\nYou chose customer")
             read_car_stock()
         elif choice == 2:
-            print("\nYou chose staff")
             new_car_stock()
         elif choice != 1 or 2:
             print(f"Please enter a valid input, you entered {choice}")
@@ -54,18 +53,26 @@ def validate_user(choice):
 
 
 def read_car_stock():
-    print(colored("Welcome to the Customer Section", "yellow"))
-    print(colored("We have a variety of Japanese Cars in stock", "yellow"))
-    
+    """
+    function reads data from google sheet
+    """
+    print(colored("\nWelcome to the Customer Section", "yellow"))
+    print(colored("\nWe have a variety of Japanese Cars in stock", "yellow")) 
+
 
 def new_car_stock():
-    print(colored("Welcome to the Staff section", "blue"))
-    new_car = input(colored("Enter new car Manufacturer & Model): ", "blue"))
+    """
+    User inputs new car stock, input is split
+    for make and model on google sheet,
+    which then updates the car_stock_worksheet
+    by adding this car
+    """
+    print(colored("\nWelcome to the Staff section", "blue"))
+    new_car = input(colored("\nEnter new car Manufacturer & Model): ", "blue"))
     stock_addition = new_car.split()
     print(f"You have successfully added {new_car}")
     stock_worksheet = SHEET.worksheet("car_stock_sheet")
     stock_worksheet.append_row(stock_addition)
-
 
 
 get_user_details()

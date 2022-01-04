@@ -1,5 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import sys
+from termcolor import colored, cprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -15,7 +17,7 @@ SHEET = GSPREAD_CLIENT.open('car_sales')
 
 print("Welcome to NC Car Sales Command Line Program. \n")
 name = input("Please enter your name : ")
-print("\nHello there " + name )
+print("\nHello there " + name)
 
 
 def get_user_details():
@@ -24,42 +26,36 @@ def get_user_details():
     """
     while True:
         user = input("\nPlease enter '1' for Customer or '2' for Staff : ")
-        
         if validate_user(user):
-            print("you entered a correct user, program running")
             break
-    
     return user
 
 
 def validate_user(choice):
     """
-    validate that user has entered an integer, 
+    validate that user has entered an integer,
     and that the integer is either 1 or 2
     """
     try:
         choice = int(choice)
-    
     except ValueError as e:
         print(f"Please enter an integer, you entered {e} ")
         return False
     else:
         if choice == 1:
             print("\nYou chose customer")
+            read_car_stock()
         elif choice == 2:
             print("\nYou chose staff")
+            update_car_stock()
         elif choice != 1 or 2:
             print(f"Please enter a valid input, you entered {choice}")
             return False
-    
     return True
 
 
-
-
-
-
-
+def read_car_stock():
+    print(colored("hello", "red"))    
 
 
 

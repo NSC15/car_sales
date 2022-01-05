@@ -67,12 +67,25 @@ def new_car_stock():
     which then updates the car_stock_worksheet
     by adding this car
     """
-    print(colored("\nWelcome to the Staff section", "blue"))
-    new_car = input(colored("\nEnter new car Manufacturer & Model): ", "blue"))
-    stock_addition = new_car.split()
-    print(f"You have successfully added {new_car}")
-    stock_worksheet = SHEET.worksheet("car_stock_sheet")
-    stock_worksheet.append_row(stock_addition)
-
+    while True:
+        print(colored("\nWelcome to the Staff section", "blue"))
+        new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
+        stock_addition = new_car.split()
+        print(f"You have successfully added {new_car}")
+        stock_worksheet = SHEET.worksheet("car_stock_sheet")
+        stock_worksheet.append_row(stock_addition)
+        print(colored("\nTo enter another car enter '1' to return to the menu enter '2'","blue"))
+        return_staff = input(colored("Please enter your choice : "))
+        if return_staff == "1":
+            new_car_stock()
+            return True
+        elif return_staff == "2":
+            print(colored("\n...returning you to beginning of program", "red"))
+            get_user_details()
+            return True
+        else:
+            print("You entered an invalid input! Please choose a valid option")
+            return False
+    
 
 get_user_details()

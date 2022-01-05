@@ -68,7 +68,7 @@ def new_car_stock():
     by adding this car
     """
     while True:
-        print(colored("\nWelcome to the Staff section", "blue"))
+        print(colored("\nYou are in the Staff section", "blue"))
         new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
         stock_addition = new_car.split()
         print(f"You have successfully added {new_car}")
@@ -76,16 +76,31 @@ def new_car_stock():
         stock_worksheet.append_row(stock_addition)
         print(colored("\nTo enter another car enter '1' to return to the menu enter '2'","blue"))
         return_staff = input(colored("Please enter your choice : "))
-        if return_staff == "1":
+        if validate_return_staff(return_staff):
+            break
+    return return_staff
+    
+
+def validate_return_staff(staff_choice):
+    """
+    validate that user has entered an integer,
+    and that the integer is either 1 or 2 to run loop.
+    """
+    try:
+        staff_choice = int(staff_choice)
+    except ValueError as e:
+        print(f"Please enter an integer, you entered {e} ")
+        return False
+    else:
+        if staff_choice == 1:
             new_car_stock()
-            return True
-        elif return_staff == "2":
+        elif staff_choice == 2:
             print(colored("\n...returning you to beginning of program", "red"))
             get_user_details()
-            return True
-        else:
-            print("You entered an invalid input! Please choose a valid option")
+        elif staff_choice != 1 or 2:
+            print(colored("\nYou entered an incorrect option, loading staff section...", "red"))
             return False
-    
+    return True
+
 
 get_user_details()

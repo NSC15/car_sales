@@ -12,8 +12,20 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('car_sales')
+stock_worksheet = SHEET.worksheet("car_stock_sheet")
+certified_stock = SHEET.worksheet("certified_stock_list")
 
 
+print("""
+'    _   _  _____    _____          _____     _____         _      ______  _____ 
+'   | \ | |/ ____|  / ____|   /\   |  __ \   / ____|  /\   | |    |  ____|/ ____|
+'   |  \| | |      | |       /  \  | |__) | | (___   /  \  | |    | |__  | (___  
+'   | . ` | |      | |      / /\ \ |  _  /   \___ \ / /\ \ | |    |  __|  \___ \ 
+'   | |\  | |____  | |____ / ____ \| | \ \   ____) / ____ \| |____| |____ ____) |
+'   |_| \_|\_____|  \_____/_/    \_\_|  \_\ |_____/_/    \_\______|______|_____/ 
+'                                                                                
+'                                                                                
+""")
 print("\nWelcome to NC Car Sales Command Line Program. \n")
 name = input("Please enter your name : ")
 print("\nHello there " + name)
@@ -60,7 +72,14 @@ def read_car_stock():
     function reads data from google sheet
     """
     print(colored("\nWelcome to the Customer Section", "yellow"))
-    print(colored("\nWe have a variety of Japanese Cars in stock", "yellow")) 
+    print(colored("\nWe have a variety of Japanese Cars in stock", "yellow"))
+    print(colored("\nPlease choose the appropriate filter", "yellow"))
+    print(colored("Enter '1' to view Honda's", "yellow"))
+    print(colored("Enter '2' to view Toyota's", "yellow"))
+    print(colored("Enter '3' to view Subaru's", "yellow"))
+    print(colored("Enter '4' to view Mitsubishi's", "yellow"))
+    print(colored("Enter '5' to view Mazda's", "yellow"))
+    filter = input(colored("\nPlease enter your desired filter : ", "green"))
 
 
 def new_car_stock():
@@ -74,12 +93,16 @@ def new_car_stock():
     new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
     stock_addition = new_car.split()
     print(f"You have successfully added {new_car}")
-    stock_worksheet = SHEET.worksheet("car_stock_sheet")
     stock_worksheet.append_row(stock_addition)
     staff_multiple_entry()
-    
+  
 
 def staff_multiple_entry():
+    """
+    loop to allow user to enter another car or return to menu
+    linked with function validate_return_staff which includes
+    function parameters
+    """
     while True:
         print(colored("\nTo enter another car enter '1'", "blue"))
         print(colored("To return to the menu enter '2'", "blue"))
@@ -87,10 +110,12 @@ def staff_multiple_entry():
         if validate_return_staff(return_staff):
             break
     return return_staff
+
+
 def validate_return_staff(staff_choice):
     """
     validate that user has entered an integer,
-    and that the integer is either 1 or 2 to run loop.
+    and that the integer is either 1 or 2.
     """
     try:
         staff_choice = int(staff_choice)

@@ -14,14 +14,15 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('car_sales')
 
 
-print("Welcome to NC Car Sales Command Line Program. \n")
+print("\nWelcome to NC Car Sales Command Line Program. \n")
 name = input("Please enter your name : ")
 print("\nHello there " + name)
 
 
 def get_user_details():
     """
-    function to get the users status to run different functions depending
+    Function for the user to input which section they wish to purse
+    Ran on a while loop so that validate user function can loop as intended
     """
     while True:
         print("\nPlease choose from either Customer Section or Staff Section")
@@ -35,6 +36,8 @@ def validate_user(choice):
     """
     validate that user has entered an integer,
     and that the integer is either 1 or 2
+    run appropriate function based on upser input or return error
+    if input is not 1 or 2
     """
     try:
         choice = int(choice)
@@ -62,25 +65,28 @@ def read_car_stock():
 
 def new_car_stock():
     """
-    User inputs new car stock, input is split
+    User inputs new car stock, input is split,
     for make and model on google sheet,
     which then updates the car_stock_worksheet
-    by adding this car
+    by adding this car. Again, on a while loop for data validation
     """
+    print(colored("\nYou are in the Staff section", "blue"))
+    new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
+    stock_addition = new_car.split()
+    print(f"You have successfully added {new_car}")
+    stock_worksheet = SHEET.worksheet("car_stock_sheet")
+    stock_worksheet.append_row(stock_addition)
+    staff_multiple_entry()
+    
+
+def staff_multiple_entry():
     while True:
-        print(colored("\nYou are in the Staff section", "blue"))
-        new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
-        stock_addition = new_car.split()
-        print(f"You have successfully added {new_car}")
-        stock_worksheet = SHEET.worksheet("car_stock_sheet")
-        stock_worksheet.append_row(stock_addition)
-        print(colored("\nTo enter another car enter '1' to return to the menu enter '2'","blue"))
+        print(colored("\nTo enter another car enter '1'", "blue"))
+        print(colored("To return to the menu enter '2'", "blue"))
         return_staff = input(colored("Please enter your choice : "))
         if validate_return_staff(return_staff):
             break
     return return_staff
-    
-
 def validate_return_staff(staff_choice):
     """
     validate that user has entered an integer,
@@ -98,7 +104,7 @@ def validate_return_staff(staff_choice):
             print(colored("\n...returning you to beginning of program", "red"))
             get_user_details()
         elif staff_choice != 1 or 2:
-            print(colored("\nYou entered an incorrect option, loading staff section...", "red"))
+            print(colored("\nYou entered an incorrect option...", "red"))
             return False
     return True
 

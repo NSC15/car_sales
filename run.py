@@ -2,6 +2,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 from termcolor import colored
 
+
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -14,6 +16,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('car_sales')
 stock_worksheet = SHEET.worksheet("car_stock_sheet")
 certified_stock = SHEET.worksheet("certified_stock_list")
+honda_filter = certified_stock.range("honda")
+
+
 
 
 print("""
@@ -79,7 +84,19 @@ def read_car_stock():
     print(colored("Enter '3' to view Subaru's", "yellow"))
     print(colored("Enter '4' to view Mitsubishi's", "yellow"))
     print(colored("Enter '5' to view Mazda's", "yellow"))
-    filter = input(colored("\nPlease enter your desired filter : ", "green"))
+    user_filter =  \
+        input(colored("\nPlease enter your desired filter: ", "green"))
+    validate_filter(user_filter)
+
+def validate_filter(user_filter):
+    try:
+        user_filter = int(user_filter)
+    except ValueError as e:
+        print(f"Please enter a valid option, you entered {e}")
+    else:
+        if user_filter == 1:
+            for i in honda_filter:
+                print(i.value)
 
 
 def new_car_stock():
@@ -134,4 +151,9 @@ def validate_return_staff(staff_choice):
     return True
 
 
+
 get_user_details()
+
+
+
+

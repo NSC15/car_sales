@@ -17,6 +17,10 @@ SHEET = GSPREAD_CLIENT.open('car_sales')
 stock_worksheet = SHEET.worksheet("car_stock_sheet")
 certified_stock = SHEET.worksheet("certified_stock_list")
 honda_filter = certified_stock.range("honda")
+mazda_filter = certified_stock.range("mazda")
+mitsubishi_filter = certified_stock.range("mitsubishi")
+subaru_filter = certified_stock.range("subaru")
+toyota_filter = certified_stock.range("toyota")
 
 
 
@@ -76,27 +80,47 @@ def read_car_stock():
     """
     function reads data from google sheet
     """
-    print(colored("\nWelcome to the Customer Section", "yellow"))
-    print(colored("\nWe have a variety of Japanese Cars in stock", "yellow"))
-    print(colored("\nPlease choose the appropriate filter", "yellow"))
-    print(colored("Enter '1' to view Honda's", "yellow"))
-    print(colored("Enter '2' to view Toyota's", "yellow"))
-    print(colored("Enter '3' to view Subaru's", "yellow"))
-    print(colored("Enter '4' to view Mitsubishi's", "yellow"))
-    print(colored("Enter '5' to view Mazda's", "yellow"))
-    user_filter =  \
-        input(colored("\nPlease enter your desired filter: ", "green"))
-    validate_filter(user_filter)
+    while True:
+        print(colored("\nYou are in the Customer Section", "yellow"))
+        print(colored("\nWe have a variety of Japanese Cars in stock", "yellow"))
+        print(colored("\nPlease choose the appropriate filter", "yellow"))
+        print(colored("Enter '1' to view Honda's", "yellow"))
+        print(colored("Enter '2' to view Toyota's", "yellow"))
+        print(colored("Enter '3' to view Subaru's", "yellow"))
+        print(colored("Enter '4' to view Mitsubishi's", "yellow"))
+        print(colored("Enter '5' to view Mazda's", "yellow"))
+        user_filter =  \
+            input(colored("\nPlease enter your desired filter: ", "green"))
+        if validate_filter(user_filter):
+            break
+    return user_filter
 
 def validate_filter(user_filter):
     try:
         user_filter = int(user_filter)
     except ValueError as e:
         print(f"Please enter a valid option, you entered {e}")
+        return False
     else:
         if user_filter == 1:
             for i in honda_filter:
                 print(i.value)
+        elif user_filter == 2:
+            for i in toyota_filter:
+                print(i.value)
+        elif user_filter == 3:
+            for i in subaru_filter:
+                print(i.value)
+        elif user_filter == 4:
+            for i in mitsubishi_filter:
+                print(i.value)
+        elif user_filter == 5:
+            for i in mazda_filter:
+                print(i.value)
+        elif user_filter not in range(1,5):
+            print(colored("\nPlease enter a valid option from the above", "red"))
+            return False
+    return True    
 
 
 def new_car_stock():
@@ -109,7 +133,7 @@ def new_car_stock():
     print(colored("\nYou are in the Staff section", "blue"))
     new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
     stock_addition = new_car.split()
-    print(f"You have successfully added {new_car}")
+    print(f"You have successfully added {new_car} to the stocklist")
     stock_worksheet.append_row(stock_addition)
     staff_multiple_entry()
   

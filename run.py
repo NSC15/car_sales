@@ -4,7 +4,6 @@ from termcolor import colored
 import pandas as pd
 
 
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -15,8 +14,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('car_sales')
-stock_worksheet = SHEET.worksheet("car_stock_sheet")
-certified_stock = SHEET.worksheet("certified_stock_list")
 honda = SHEET.worksheet("Honda")
 toyota = SHEET.worksheet("Toyota")
 subaru = SHEET.worksheet("Subaru")
@@ -38,12 +35,13 @@ print("\nHello there " + name)
 def get_user_details():
     """
     user can input which section they wish to pursue
-    while loop to move onto next function if 'validate_user' function 
+    while loop to move onto next function if 'validate_user' function
     returns true.
     """
     while True:
         print("\nPlease choose from either Customer Section or Staff Section")
-        user = input(colored("\n'1' for Customer Section | '2' for Staff Section : ", "magenta"))
+        user =  \
+            input(colored("\n'1' for Customer | '2' for Staff: ", "magenta"))
         if validate_user(user):
             break
     return user
@@ -60,7 +58,6 @@ def validate_user(choice):
         choice = int(choice)
         if choice > 2:
             raise ValueError(choice)
-            return False
     except ValueError as e:
         print("\n")
         print(f"Please enter a valid integer, you entered {e} ")
@@ -82,7 +79,7 @@ def read_car_stock():
     """
     while True:
         print(colored("\nYou are in the Customer Section", "yellow"))
-        print(colored("\nWe have a variety of Japanese Cars in stock", "yellow"))
+        print(colored("\nWe have a variety of Cars in stock", "yellow"))
         print(colored("\nPlease choose the appropriate filter", "yellow"))
         print(colored("Enter '1' to view Honda's", "yellow"))
         print(colored("Enter '2' to view Toyota's", "yellow"))
@@ -95,14 +92,13 @@ def read_car_stock():
             break
     return user_filter
 
+
 def validate_filter(user_filter):
     """
     Pulls and displays data from API (Google Sheet) based on user choice.
-    Validates that an input is of the correct type (integer), 
+    Validates that an input is of the correct type (integer),
     and only accepts inputs between 1 and 5 as per instructions displayed.
-    """
-    
-    
+    """  
     try:
         user_filter = int(user_filter)
     except ValueError as e:
@@ -119,8 +115,8 @@ def validate_filter(user_filter):
             print(dfmitsubishi.head())
         elif user_filter == 5:
             print(dfmazda.head())
-        elif user_filter not in range(1,5):
-            print(colored("\nPlease enter a valid option from the above", "red"))
+        elif user_filter not in range(1, 5):
+            print(colored("\nPlease enter a valid option", "red"))
             return False
     return True    
 
@@ -134,12 +130,24 @@ def new_car_stock():
     While loop used for data validation and continuation.
     """
     print(colored("\nYou are in the Staff section", "green"))
-    new_car = input(colored("\nEnter new car Manufacturer & Model: ", "magenta"))
+    print(colored("\nPlease enter the following details", "green"))
+    print(colored("""
+    Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
+    new_car = input(colored("\nEnter new car : ", "magenta"))
     stock_addition = new_car.split()
     print(f"You have successfully added {new_car} to the stocklist")
-    stock_worksheet.append_row(stock_addition)
+    if "honda" in stock_addition:
+        honda.append_row(stock_addition)
+    elif "toyota" in stock_addition:
+        toyota.append_row(stock_addition)
+    elif "subaru" in stock_addition:
+        subaru.append_row(stock_addition)
+    elif "mitsubishi" in stock_addition:
+        mitsubishi.append_row(stock_addition)
+    elif "mazda" in stock_addition:
+        mazda.append_row(stock_addition)
     staff_multiple_entry()
-  
+ 
 
 def staff_multiple_entry():
     """
@@ -149,8 +157,8 @@ def staff_multiple_entry():
     """
     while True:
         print(colored("\nTo enter another car enter '1'", "blue"))
-        print(colored("To return to the menu enter '2'", "blue"))
-        return_staff = input(colored("Please enter your choice : "))
+        print(colored("\nTo return to the menu enter '2'", "blue"))
+        return_staff = input(colored("\nPlease enter your choice : "))
         if validate_return_staff(return_staff):
             break
     return return_staff
@@ -176,7 +184,6 @@ def validate_return_staff(staff_choice):
             print(colored("\nYou entered an incorrect option...", "red"))
             return False
     return True
-
 
 
 get_user_details()

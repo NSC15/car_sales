@@ -30,23 +30,8 @@ dfmitsubishi = pd.DataFrame(mitsubishi.get_all_records())
 dfmazda = pd.DataFrame(mazda.get_all_records())
 
 
-
-
-
-
-
-print("""
-'    _   _  _____    _____          _____     _____         _      ______  _____ 
-'   | \ | |/ ____|  / ____|   /\   |  __ \   / ____|  /\   | |    |  ____|/ ____|
-'   |  \| | |      | |       /  \  | |__) | | (___   /  \  | |    | |__  | (___  
-'   | . ` | |      | |      / /\ \ |  _  /   \___ \ / /\ \ | |    |  __|  \___ \ 
-'   | |\  | |____  | |____ / ____ \| | \ \   ____) / ____ \| |____| |____ ____) |
-'   |_| \_|\_____|  \_____/_/    \_\_|  \_\ |_____/_/    \_\______|______|_____/ 
-'                                                                                
-'                                                                                
-""")
-print("\nWelcome to NC Car Sales Command Line Program. \n")
-name = input("Please enter your name : ")
+print(colored("\nWelcome to NC Car Sales Command Line Program. \n", "cyan"))
+name = input(colored("Please enter your name : ", "magenta"))
 print("\nHello there " + name)
 
 
@@ -58,7 +43,7 @@ def get_user_details():
     """
     while True:
         print("\nPlease choose from either Customer Section or Staff Section")
-        user = input("\n'1' for Customer Section | '2' for Staff Section : ")
+        user = input(colored("\n'1' for Customer Section | '2' for Staff Section : ", "magenta"))
         if validate_user(user):
             break
     return user
@@ -73,17 +58,18 @@ def validate_user(choice):
     """
     try:
         choice = int(choice)
+        if choice > 2:
+            raise ValueError(choice)
+            return False
     except ValueError as e:
-        print(f"Please enter an integer, you entered {e} ")
+        print("\n")
+        print(f"Please enter a valid integer, you entered {e} ")
         return False
     else:
         if choice == 1:
             read_car_stock()
         elif choice == 2:
             new_car_stock()
-        elif choice != 1 or 2:
-            print(f"Please enter a valid input, you entered {choice}")
-            return False
     return True
 
 
@@ -104,14 +90,14 @@ def read_car_stock():
         print(colored("Enter '4' to view Mitsubishi's", "yellow"))
         print(colored("Enter '5' to view Mazda's", "yellow"))
         user_filter =  \
-            input(colored("\nPlease enter your desired filter: ", "green"))
+            input(colored("\nPlease enter your desired filter: ", "magenta"))
         if validate_filter(user_filter):
             break
     return user_filter
 
 def validate_filter(user_filter):
     """
-    Pulls and displays range of data from API (Google Sheet) based on user choice.
+    Pulls and displays data from API (Google Sheet) based on user choice.
     Validates that an input is of the correct type (integer), 
     and only accepts inputs between 1 and 5 as per instructions displayed.
     """
@@ -127,7 +113,6 @@ def validate_filter(user_filter):
             print(dfhonda.head())
         elif user_filter == 2:
             print(dftoyota.head())
-            
         elif user_filter == 3:
             print(dfsubaru.head())
         elif user_filter == 4:
@@ -148,8 +133,8 @@ def new_car_stock():
     with the input.
     While loop used for data validation and continuation.
     """
-    print(colored("\nYou are in the Staff section", "blue"))
-    new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
+    print(colored("\nYou are in the Staff section", "green"))
+    new_car = input(colored("\nEnter new car Manufacturer & Model: ", "magenta"))
     stock_addition = new_car.split()
     print(f"You have successfully added {new_car} to the stocklist")
     stock_worksheet.append_row(stock_addition)
@@ -195,10 +180,3 @@ def validate_return_staff(staff_choice):
 
 
 get_user_details()
-
-
-
-
-#hondas = ' - '.join([str(i.value) for i in honda_filter])
- #               car = hondas[0:4]
-  #              print("ID:" + car)

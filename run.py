@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from termcolor import colored
+import pandas as pd
 
 
 
@@ -16,11 +17,20 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('car_sales')
 stock_worksheet = SHEET.worksheet("car_stock_sheet")
 certified_stock = SHEET.worksheet("certified_stock_list")
-honda_filter = certified_stock.range("honda")
-mazda_filter = certified_stock.range("mazda")
-mitsubishi_filter = certified_stock.range("mitsubishi")
-subaru_filter = certified_stock.range("subaru")
-toyota_filter = certified_stock.range("toyota")
+honda = SHEET.worksheet("Honda")
+toyota = SHEET.worksheet("Toyota")
+subaru = SHEET.worksheet("Subaru")
+mitsubishi = SHEET.worksheet("Mitsubishi")
+mazda = SHEET.worksheet("Mazda")
+
+dfhonda = pd.DataFrame(honda.get_all_records())
+dftoyota = pd.DataFrame(toyota.get_all_records())
+dfsubaru = pd.DataFrame(subaru.get_all_records())
+dfmitsubishi = pd.DataFrame(mitsubishi.get_all_records())
+dfmazda = pd.DataFrame(mazda.get_all_records())
+
+
+
 
 
 
@@ -42,8 +52,9 @@ print("\nHello there " + name)
 
 def get_user_details():
     """
-    Function for the user to input which section they wish to purse
-    Ran on a while loop so that validate user function can loop as intended
+    user can input which section they wish to pursue
+    while loop to move onto next function if 'validate_user' function 
+    returns true.
     """
     while True:
         print("\nPlease choose from either Customer Section or Staff Section")
@@ -78,7 +89,10 @@ def validate_user(choice):
 
 def read_car_stock():
     """
-    function reads data from google sheet
+    customer section, displays instructions to user for filtering results
+    prompts an input 'user_filter' which is then given to the validate function
+    all code within a while loop, to stop if the input is acceptable -
+    determined by the 'validate_filter' function.
     """
     while True:
         print(colored("\nYou are in the Customer Section", "yellow"))
@@ -96,6 +110,13 @@ def read_car_stock():
     return user_filter
 
 def validate_filter(user_filter):
+    """
+    Pulls and displays range of data from API (Google Sheet) based on user choice.
+    Validates that an input is of the correct type (integer), 
+    and only accepts inputs between 1 and 5 as per instructions displayed.
+    """
+    
+    
     try:
         user_filter = int(user_filter)
     except ValueError as e:
@@ -103,20 +124,16 @@ def validate_filter(user_filter):
         return False
     else:
         if user_filter == 1:
-            for i in honda_filter:
-                print(i.value)
+            print(dfhonda.head())
         elif user_filter == 2:
-            for i in toyota_filter:
-                print(i.value)
+            print(dftoyota.head())
+            
         elif user_filter == 3:
-            for i in subaru_filter:
-                print(i.value)
+            print(dfsubaru.head())
         elif user_filter == 4:
-            for i in mitsubishi_filter:
-                print(i.value)
+            print(dfmitsubishi.head())
         elif user_filter == 5:
-            for i in mazda_filter:
-                print(i.value)
+            print(dfmazda.head())
         elif user_filter not in range(1,5):
             print(colored("\nPlease enter a valid option from the above", "red"))
             return False
@@ -128,7 +145,8 @@ def new_car_stock():
     User inputs new car stock, input is split,
     for make and model on google sheet,
     which then updates the car_stock_worksheet
-    by adding this car. Again, on a while loop for data validation
+    with the input.
+    While loop used for data validation and continuation.
     """
     print(colored("\nYou are in the Staff section", "blue"))
     new_car = input(colored("\nEnter new car Manufacturer & Model: ", "blue"))
@@ -181,3 +199,6 @@ get_user_details()
 
 
 
+#hondas = ' - '.join([str(i.value) for i in honda_filter])
+ #               car = hondas[0:4]
+  #              print("ID:" + car)

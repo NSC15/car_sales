@@ -1,33 +1,8 @@
-import gspread
-from google.oauth2.service_account import Credentials
+from constants import *
 from termcolor import colored
-import pandas as pd
 import re
 
-
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('car_sales')
-honda = SHEET.worksheet("Honda")
-toyota = SHEET.worksheet("Toyota")
-subaru = SHEET.worksheet("Subaru")
-mitsubishi = SHEET.worksheet("Mitsubishi")
-mazda = SHEET.worksheet("Mazda")
-
-dfhonda = pd.DataFrame(honda.get_all_records())
-dftoyota = pd.DataFrame(toyota.get_all_records())
-dfsubaru = pd.DataFrame(subaru.get_all_records())
-dfmitsubishi = pd.DataFrame(mitsubishi.get_all_records())
-dfmazda = pd.DataFrame(mazda.get_all_records())
-
-
+# -------- Initiation of program -------
 print(colored("\nWelcome to NC Car Sales Command Line Program. \n", "cyan"))
 while True:
     name = input(colored("Please enter your name : ", "magenta"))
@@ -35,7 +10,7 @@ while True:
         break
 print("\nHello there " + name)
 
-
+# -------- User Choice -------#
 def get_user_details():
     """
     user can input which section they wish to pursue
@@ -50,7 +25,7 @@ def get_user_details():
             break
     return user
 
-
+# ------- User Choice Data Validation -------
 def validate_user(choice):
     """
     validate that user has entered an integer,
@@ -70,10 +45,18 @@ def validate_user(choice):
         if choice == 1:
             read_car_stock()
         elif choice == 2:
-            new_car_stock()
+            while True:
+                print("\n")
+                user_pass = input(colored("Please enter Staff password: ", "magenta"))
+                if user_pass == password:
+                    new_car_stock()
+                    break
+                else:
+                    print(colored("\nPassword Incorrect", "red"))
+                    continue
     return True
 
-
+# ------- Customer Section / Read API Data --------
 def read_car_stock():
     """
     customer section, displays instructions to user for filtering results
@@ -96,7 +79,7 @@ def read_car_stock():
             break
     return user_filter
 
-
+# ------- API Data Filter Validation --------
 def validate_filter(user_filter):
     """
     Pulls and displays data from API (Google Sheet) based on user choice.
@@ -109,22 +92,14 @@ def validate_filter(user_filter):
         print(f"Please enter a valid option, you entered {e}")
         return False
     else:
-        if user_filter == 1:
-            print(dfhonda.head())
-        elif user_filter == 2:
-            print(dftoyota.head())
-        elif user_filter == 3:
-            print(dfsubaru.head())
-        elif user_filter == 4:
-            print(dfmitsubishi.head())
-        elif user_filter == 5:
-            print(dfmazda.head())
-        elif user_filter not in range(1, 5):
+        if user_filter >= 1 and user_filter <= 5:
+            print(car_to_dataframe_mapper[user_filter].head())
+        else:
             print(colored("\nPlease enter a valid option", "red"))
             return False
-    return True    
+    return True
 
-
+# -------- Staff Section / Write Data to API source (Google Sheet)-------
 def new_car_stock():
     """
     User inputs new car stock, input is split,
@@ -134,12 +109,20 @@ def new_car_stock():
     While loop used for data validation and continuation.
     """
     print(colored("\nYou are in the Staff section", "green"))
-    print(colored("\nPlease enter the following details", "green"))
-    print(colored("""
-    Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
-    new_car = input(colored("\nEnter new car : ", "magenta"))
-    stock_addition = new_car.split()
-    print(f"You have successfully added {new_car} to the stocklist")
+    while True:
+        
+        print(colored("\nPlease enter the following - ", "green"))
+        print(colored("""
+Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
+        print("\nInclude a space between entries")
+        new_car = input(colored("\nEnter new car : ", "magenta"))
+        stock_addition = new_car.split()
+        if len(stock_addition) == 7:
+            break
+        else:
+            print(colored("\nPlease enter all required information", "red"))
+            continue
+    print(f"You added {new_car} to the stocklist")
     if "honda" in stock_addition:
         honda.append_row(stock_addition)
     elif "toyota" in stock_addition:
@@ -152,7 +135,7 @@ def new_car_stock():
         mazda.append_row(stock_addition)
     staff_multiple_entry()
  
-
+# ------- Staff Section / Continuation (Enter another or return)--------
 def staff_multiple_entry():
     """
     loop to allow user to enter another car or return to menu
@@ -167,7 +150,7 @@ def staff_multiple_entry():
             break
     return return_staff
 
-
+# -------- Validation for Staff Section Continuation --------
 def validate_return_staff(staff_choice):
     """
     validate that user has entered an integer,
@@ -182,7 +165,7 @@ def validate_return_staff(staff_choice):
         if staff_choice == 1:
             new_car_stock()
         elif staff_choice == 2:
-            print(colored("\n...returning you to beginning of program", "red"))
+            print(colored("\n...logging out", "red"))
             get_user_details()
         elif staff_choice != 1 or 2:
             print(colored("\nYou entered an incorrect option...", "red"))

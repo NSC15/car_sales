@@ -5,6 +5,13 @@ from constants import (PASSWORD, honda, toyota, subaru, mitsubishi, mazda,
 
 
 # -------- Initiation of program -------
+print("""
+   ___             __       _          
+  / __\__ _ _ __  / _\ __ _| | ___ ___ 
+ / /  / _` | '__| \ \ / _` | |/ _ / __|
+/ /__| (_| | |    _\ | (_| | |  __\__ \\
+\____/\__,_|_|    \__/\__,_|_|\___|___/
+""")
 print(colored("\nWelcome to NC Car Sales Command Line Program. \n", "cyan"))
 while True:
     name = input(colored("Please enter your name : ", "magenta"))
@@ -105,6 +112,18 @@ def validate_filter(user_filter):
     else:
         if user_filter >= 1 and user_filter <= 5:
             print(car_to_dataframe_mapper[user_filter].head())
+            print("\nTo view more enter '1' to exit enter '2'")
+            print("\nBe careful any other input will end the program!!\n")
+            return_customer = input(colored("Your Choice: ", "magenta"))
+            return_customer = int(return_customer)
+            if return_customer == 1:
+                read_car_stock()
+            elif return_customer == 2:
+                print(colored("\n...logging out", "red"))
+                get_user_details()
+            else:
+                print("\nYou crashed the program...")
+                exit()  
         else:
             print(colored("\nPlease enter a valid option", "red"))
             return False

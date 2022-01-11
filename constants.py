@@ -17,7 +17,7 @@ toyota = SHEET.worksheet("Toyota")
 subaru = SHEET.worksheet("Subaru")
 mitsubishi = SHEET.worksheet("Mitsubishi")
 mazda = SHEET.worksheet("Mazda")
-password = "carsales"
+PASSWORD = "carsales"
 
 dfhonda = pd.DataFrame(honda.get_all_records())
 dftoyota = pd.DataFrame(toyota.get_all_records())

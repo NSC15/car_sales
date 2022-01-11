@@ -1,6 +1,8 @@
-from constants import *
-from termcolor import colored
 import re
+from termcolor import colored
+from constants import (PASSWORD, honda, toyota, subaru, mitsubishi, mazda,
+                       car_to_dataframe_mapper)
+
 
 # -------- Initiation of program -------
 print(colored("\nWelcome to NC Car Sales Command Line Program. \n", "cyan"))
@@ -11,6 +13,8 @@ while True:
 print("\nHello there " + name)
 
 # -------- User Choice -------#
+
+
 def get_user_details():
     """
     user can input which section they wish to pursue
@@ -26,6 +30,8 @@ def get_user_details():
     return user
 
 # ------- User Choice Data Validation -------
+
+
 def validate_user(choice):
     """
     validate that user has entered an integer,
@@ -47,8 +53,9 @@ def validate_user(choice):
         elif choice == 2:
             while True:
                 print("\n")
-                user_pass = input(colored("Please enter Staff password: ", "magenta"))
-                if user_pass == password:
+                user_pass = \
+                    input(colored("Please enter Staff password: ", "magenta"))
+                if user_pass == PASSWORD:
                     new_car_stock()
                     break
                 else:
@@ -57,6 +64,8 @@ def validate_user(choice):
     return True
 
 # ------- Customer Section / Read API Data --------
+
+
 def read_car_stock():
     """
     customer section, displays instructions to user for filtering results
@@ -80,12 +89,14 @@ def read_car_stock():
     return user_filter
 
 # ------- API Data Filter Validation --------
+
+
 def validate_filter(user_filter):
     """
     Pulls and displays data from API (Google Sheet) based on user choice.
     Validates that an input is of the correct type (integer),
     and only accepts inputs between 1 and 5 as per instructions displayed.
-    """  
+    """      
     try:
         user_filter = int(user_filter)
     except ValueError as e:
@@ -100,6 +111,8 @@ def validate_filter(user_filter):
     return True
 
 # -------- Staff Section / Write Data to API source (Google Sheet)-------
+
+
 def new_car_stock():
     """
     User inputs new car stock, input is split,
@@ -109,12 +122,11 @@ def new_car_stock():
     While loop used for data validation and continuation.
     """
     print(colored("\nYou are in the Staff section", "green"))
-    while True:
-        
+    while True:       
         print(colored("\nPlease enter the following - ", "green"))
         print(colored("""
 Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
-        print("\nInclude a space between entries")
+        print("\nAll Lowercase | Include a space between entries")
         new_car = input(colored("\nEnter new car : ", "magenta"))
         stock_addition = new_car.split()
         if len(stock_addition) == 7:
@@ -134,8 +146,10 @@ Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
     elif "mazda" in stock_addition:
         mazda.append_row(stock_addition)
     staff_multiple_entry()
- 
+
 # ------- Staff Section / Continuation (Enter another or return)--------
+
+
 def staff_multiple_entry():
     """
     loop to allow user to enter another car or return to menu
@@ -151,6 +165,8 @@ def staff_multiple_entry():
     return return_staff
 
 # -------- Validation for Staff Section Continuation --------
+
+
 def validate_return_staff(staff_choice):
     """
     validate that user has entered an integer,

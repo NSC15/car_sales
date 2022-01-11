@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from termcolor import colored
 import pandas as pd
+import re
 
 
 SCOPE = [
@@ -28,7 +29,10 @@ dfmazda = pd.DataFrame(mazda.get_all_records())
 
 
 print(colored("\nWelcome to NC Car Sales Command Line Program. \n", "cyan"))
-name = input(colored("Please enter your name : ", "magenta"))
+while True:
+    name = input(colored("Please enter your name : ", "magenta"))
+    if re.search(r'^[a-zA-z]+$', name):
+        break
 print("\nHello there " + name)
 
 

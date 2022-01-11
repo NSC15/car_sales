@@ -14,7 +14,7 @@ print("""
 """)
 print(colored("\nWelcome to NC Car Sales Command Line Program. \n", "cyan"))
 while True:
-    name = input(colored("Please enter your name : ", "magenta"))
+    name = input(colored("Please enter your name :\n ", "magenta"))
     if re.search(r'^[a-zA-z]+$', name):
         break
 print("\nHello there " + name)
@@ -31,7 +31,7 @@ def get_user_details():
     while True:
         print("\nPlease choose from either Customer Section or Staff Section")
         user =  \
-            input(colored("\n'1' for Customer | '2' for Staff: ", "magenta"))
+            input(colored("\n'1' for Customer | '2' for Staff:\n ", "magenta"))
         if validate_user(user):
             break
     return user
@@ -61,7 +61,7 @@ def validate_user(choice):
             while True:
                 print("\n")
                 user_pass = \
-                    input(colored("Please enter Staff password: ", "magenta"))
+                    input(colored("Please enter Staff password:\n ", "magenta"))
                 if user_pass == PASSWORD:
                     new_car_stock()
                     break
@@ -90,7 +90,7 @@ def read_car_stock():
         print(colored("Enter '4' to view Mitsubishi's", "yellow"))
         print(colored("Enter '5' to view Mazda's", "yellow"))
         user_filter =  \
-            input(colored("\nPlease enter your desired filter: ", "magenta"))
+            input(colored("\nPlease enter your desired filter:\n ", "magenta"))
         if validate_filter(user_filter):
             break
     return user_filter
@@ -114,7 +114,7 @@ def validate_filter(user_filter):
             print(car_to_dataframe_mapper[user_filter].head())
             print("\nTo view more enter '1' to exit enter '2'")
             print("\nBe careful any other input will end the program!!\n")
-            return_customer = input(colored("Your Choice: ", "magenta"))
+            return_customer = input(colored("Your Choice:\n ", "magenta"))
             return_customer = int(return_customer)
             if return_customer == 1:
                 read_car_stock()
@@ -146,7 +146,7 @@ def new_car_stock():
         print(colored("""
 Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
         print("\nAll Lowercase | Include a space between entries")
-        new_car = input(colored("\nEnter new car : ", "magenta"))
+        new_car = input(colored("\nEnter new car :\n ", "magenta"))
         stock_addition = new_car.split()
         if len(stock_addition) == 7:
             break
@@ -178,7 +178,7 @@ def staff_multiple_entry():
     while True:
         print(colored("\nTo enter another car enter '1'", "blue"))
         print(colored("\nTo return to the menu enter '2'", "blue"))
-        return_staff = input(colored("\nPlease enter your choice : "))
+        return_staff = input(colored("\nPlease enter your choice :\n "))
         if validate_return_staff(return_staff):
             break
     return return_staff

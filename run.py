@@ -114,16 +114,13 @@ def validate_filter(user_filter):
         if user_filter >= 1 and user_filter <= 5:
             print(car_to_dataframe_mapper[user_filter].head(20))
             print("\nTo view more enter '1' to exit enter '2'")
-            print("\nBe careful any other input will end the program!!\n")
+            print("\n\n")
             return_customer = input("Your Choice: ")
             return_customer = int(return_customer)
             if return_customer == 1:
                 read_car_stock()
-            elif return_customer == 2:
-                print(colored("\n...logging out", "red"))
-                get_user_details()
             else:
-                print("\nIncorrect input - ... returning to menu")
+                print(colored("\n...Logging out", "red"))
                 get_user_details()
                   
         else:
@@ -142,11 +139,18 @@ def new_car_stock():
     with the input.
     While loop used for data validation and continuation.
     """
-    print(colored("\nYou are in the Staff section", "green"))
+    print(colored("\nYou are in the Staff section\n", "green"))
     while True:       
+        print(colored("Manufacturers we deal in are - \n", "green"))
+        print(colored("Honda", "green"))
+        print(colored("Toyota", "green"))
+        print(colored("Subaru", "green"))
+        print(colored("Mitsubishi", "green"))
+        print(colored("Mazda", "green"))
         print(colored("\nPlease enter the following - ", "green"))
         print(colored("""
 Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
+        print("\nExample - honda civic sport red 1.6L good £3,500")
         print("\nAll Lowercase | Include a space between entries")
         new_car = input("\nEnter new car : ")
         stock_addition = new_car.split()

@@ -1,31 +1,53 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# NC Car Sales Command Line Program
 
-Welcome NSC15,
+## Live Link - <https://nc-car-sales.herokuapp.com/>
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+![CLI image](assets/images/CLI.png)
 
-## Reminders
+## Background
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+The Car sales is my third Milestone Project, this time using Python to create a CLI which uses an API to access data from an external Google sheet with cars for sale details,
+this program allows the user to access two sides to the program, the customer side which is viewing available stock of cars from a fictional Japanese based car dealership, or the
+staff section which requires a password to enter ("carsales") and then allows the user to enter a car into the database. The program has several loops and data validation to create
+a fully accessible application.
 
-## Creating the Heroku app
+## User Experience (UX)
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+### User Story & Target Audience
 
-1. `heroku/python`
-2. `heroku/nodejs`
+#### First Time Visitor Goals
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+- I want to be able to enter some personal namely detail
+- I want to be able to define what type of user i am, and access the relevant part
+- I want to be able to access cars for sale data (customer)
+- I want to be able to filter the cars i want to see
+- I want to be able to login and access protected parts of the program
+- I want to be able to input new stock into the program
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+#### Target Audience
 
-Connect your GitHub repository and deploy as normal.
+- The Target Audience for this APP is aimed at but not limited to anyone which would be looking to buy a car from this fictional car dealership. The app is made in a way to be multi-functional
+by being able to choose which user route you want to go down at the beginning of the program.
 
-## Constraints
+## Design
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### Colour Scheme
 
------
-Happy coding!
+- Due to this being a terminal, design is limited.
+- I have used different font colours to improve readability and group text subjects into colours.
+
+### Font
+
+- I have added ASCII Art into the CLI for the main loading text, again to spruce up the terminal. With the intention to provide a unique user interface.
+
+- Different font colours are used throughout the terminal, which have been imported from the python library TermColor
+
+## Layout and Functionality of the CLI
+
+### The first terminal loading stage -
+
+You are greeted with the ASCII Art Car Sales logo as such, with then an input to enter your name as the user,
+this input will only accept alphabetical characters either lowercase or uppercase as programmed by the developer for validation.
+
+ 
+

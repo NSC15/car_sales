@@ -46,8 +46,73 @@ by being able to choose which user route you want to go down at the beginning of
 
 ### The first terminal loading stage -
 
-You are greeted with the ASCII Art Car Sales logo as such, with then an input to enter your name as the user,
+- You are greeted with the ASCII Art Car Sales logo as such, with then an input to enter your name as the user,
 this input will only accept alphabetical characters either lowercase or uppercase as programmed by the developer for validation.
 
- 
+- The user then gets recognition that their name has been entered via the print message, which
+then leads on to a user choice to determine their intentions, customer section or staff
+section?
+
+### Customer Section
+
+- User has chosen option 1 to enter the customer section, the program then displays introductory text, telling
+the user they are in this section, and the appropriate filters they can choose for make of car they are
+interested in, lastly the input is then waiting for the users choice
+
+- If a valid option has been chosen a DataFrame will be displayed, which reads the data from the API of stock
+available and certain details about the cars, however if an invalid filter is entered then the program tells the
+user to enter a valid option (program to loop until a valid option is entered). Finally, the user is then prompted with the choice of viewing more cars and returning to the start (providing full navigation through the
+program with needing to restart the terminal)
+
+- Once an entry is entered via the Staff Section, this should then be displayed in the relevant filter on this
+section, as the new data will be pulled through via the API
+
+### Staff Section
+
+- User has chosen option 2 for the Staff Section, this then requires a password to semi-emulate a real life
+application. Please Note the password is "carsales". The program will check the password, and deny entry if
+the entered password is incorrect.
+
+- Once into the staff section, the user is then prompted with the instructions and an example of how to enter
+the data into the program to send to the external source (google sheet) via the API. The program is designed to
+check for the correct amount of enteries to stop missing data being added.
+
+## WireFrames
+
+- No Wireframe created for this project due it being a terminal based application.
+
+## Features
+
+- Inputs
+- Input Validation
+- Loops
+- Read API Data
+- Write Data via API
+- Controlled Errors
+
+## Future Improvements
+
+- Extensive filtering (by engine / price)
+- Larger database to hold any make of car
+- Automatic updating of data (Currently terminal requires restarting to see a new entry)
+
+## Back-End Data Source
+
+- I have used a Google sheet and linked my program to read / write data with
+
+## Technologies
+
+- Termcolor - Used to implement coloured text into my terminals design
+- Pandas - Data Processing library, used DataFrames to display my API data.
+- gspread - Used to connect up Google Sheets
+- re - Used for validating user inputs when declaring name variable
+
+## Testing
+
+- Auto Testing - Completed by PEP8, returned with no errors
+- Manual Testing - Manual testing completed in development stages as well as on the deployed version.
+- Testing completed after each function was coded to maintain working code, and identify bugs early in able to fix efficiently.
+- Responsive testing not needed in this project as app is targeted at desktop users only. However, app does work in multiple browsers
+tested in Google Chrome and Mozilla FireFox.
+
 

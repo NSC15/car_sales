@@ -6,8 +6,8 @@ from constants import (PASSWORD, honda, toyota, subaru, mitsubishi, mazda,
 
 # -------- Initiation of program -------
 print("""
-   ___             __       _          
-  / __\__ _ _ __  / _\ __ _| | ___ ___ 
+   ___             __       _
+  / __\__ _ _ __  / _\ __ _| | ___ ___
  / /  / _` | '__| \ \ / _` | |/ _ / __|
 / /__| (_| | |    _\ | (_| | |  __\__ \\
 \____/\__,_|_|    \__/\__,_|_|\___|___/
@@ -42,9 +42,9 @@ def get_user_details():
 
 def validate_user(choice):
     """
-    validate that user has entered an integer,
+    validate that the user has entered an integer,
     and that the integer is either 1 or 2
-    run appropriate function based on upser input or return error
+    run appropriate function based on user input or return an error
     if input is not 1 or 2
     """
     try:
@@ -104,7 +104,7 @@ def validate_filter(user_filter):
     Pulls and displays data from API (Google Sheet) based on user choice.
     Validates that an input is of the correct type (integer),
     and only accepts inputs between 1 and 5 as per instructions displayed.
-    """      
+    """
     try:
         user_filter = int(user_filter)
     except ValueError as e:
@@ -114,7 +114,7 @@ def validate_filter(user_filter):
         if user_filter >= 1 and user_filter <= 5:
             print(car_to_dataframe_mapper[user_filter].head(20))
             print("\nTo view more enter '1' to exit enter '2'")
-            print("\n\n")
+            print("\n")
             return_customer = input("Your Choice: ")
             return_customer = int(return_customer)
             if return_customer == 1:
@@ -122,7 +122,6 @@ def validate_filter(user_filter):
             else:
                 print(colored("\n...Logging out", "red"))
                 get_user_details()
-                  
         else:
             print(colored("\nPlease enter a valid option", "red"))
             return False
@@ -140,7 +139,7 @@ def new_car_stock():
     While loop used for data validation and continuation.
     """
     print(colored("\nYou are in the Staff section\n", "green"))
-    while True:       
+    while True:
         print(colored("Manufacturers we deal in are - \n", "green"))
         print(colored("Honda", "green"))
         print(colored("Toyota", "green"))
@@ -159,7 +158,8 @@ Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
         else:
             print(colored("\nPlease enter all required information", "red"))
             continue
-    print(f"You added {new_car} to the stocklist")
+    print("\n")
+    print(f"You added {stock_addition} to the stocklist")
     if "honda" in stock_addition:
         honda.append_row(stock_addition)
     elif "toyota" in stock_addition:

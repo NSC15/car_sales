@@ -116,7 +116,11 @@ def validate_filter(user_filter):
             print("\nTo view more enter '1' to exit enter '2'")
             print("\n")
             return_customer = input("Your Choice: ")
-            return_customer = int(return_customer)
+            try:
+                return_customer = int(return_customer)
+            except ValueError as e:
+                print(f"{e} is invalid, returning ...")
+                return False
             if return_customer == 1:
                 read_car_stock()
             else:

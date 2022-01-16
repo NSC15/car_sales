@@ -122,12 +122,15 @@ def validate_filter(user_filter):
             try:
                 return_customer = int(return_customer)
             except ValueError as e:
-                print(f"{e} is invalid, returning ...")
-                return False
+                print(colored(f"{e} is invalid, returning to menu", "red"))
+                get_user_details()
             if return_customer == 1:
                 read_car_stock()
+            elif return_customer == 2:
+                print(colored("\n...Returning", "red"))
+                get_user_details()
             else:
-                print(colored("\n...Logging out", "red"))
+                print(colored("Incorrect Input, exiting section...", "red"))
                 get_user_details()
         else:
             print(colored("\nPlease enter a valid option", "red"))

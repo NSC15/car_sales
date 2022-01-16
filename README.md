@@ -6,10 +6,10 @@
 
 ## Background
 
-The Car sales is my third Milestone Project, this time using Python to create a CLI which uses an API to access data from an external Google sheet with cars for sale details,
+The NC Car Sales App is my third Milestone Project, this time using Python to create a CLI which uses an API to read and write data from an external Google sheet with car details,
 this program allows the user to access two sides to the program, the customer side which is viewing available stock of cars from a fictional Japanese based car dealership, or the
-staff section which requires a password to enter ("carsales") and then allows the user to enter a car into the database. The program has several loops and data validation to create
-a fully accessible application.
+staff section which requires a password to enter (password = "carsales") and then allows the user to enter a car into the database. The program has several loops and data validation to create
+a fully navigational application.
 
 ## User Experience (UX)
 
@@ -17,23 +17,27 @@ a fully accessible application.
 
 #### First Time Visitor Goals
 
-- I want to be able to enter some personal namely detail
-- I want to be able to define what type of user i am, and access the relevant part
+- I want to be able to define what type of user i am, and access the relevant section
 - I want to be able to access cars for sale data (customer)
-- I want to be able to filter the cars i want to see
+- I want to be able to filter the cars i wish to view.
 - I want to be able to login and access protected parts of the program
 - I want to be able to input new stock into the program
 
+#### Returning Visitor Goals
+
+- I want to view latest available cars
+- I want to add new car stock to the database
+
 #### Target Audience
 
-- The Target Audience for this APP is aimed at but not limited to anyone which would be looking to buy a car from this fictional car dealership. The app is made in a way to be multi-functional
-by being able to choose which user route you want to go down at the beginning of the program.
+- The Target Audience for this APP is aimed at but not limited to anyone which would be looking to buy a car from this fictional car dealership, or alternatively, any member of staff required to input new stock entries for customer viewing.
+- The app is made in a way to be multi-functional by being able to choose which user route you want to go down at the beginning of the program.
 
 ## Design
 
 ### Colour Scheme
 
-- Due to this being a terminal, design is limited.
+- Due to this being a terminal, design is limited unlike front-end projects.
 - I have used different font colours to improve readability and group text subjects into colours.
 
 ### Font
@@ -61,8 +65,8 @@ interested in, lastly the input is then waiting for the users choice
 
 - If a valid option has been chosen a DataFrame will be displayed, which reads the data from the API of stock
 available and certain details about the cars, however if an invalid filter is entered then the program tells the
-user to enter a valid option (program to loop until a valid option is entered). Finally, the user is then prompted with the choice of viewing more cars and returning to the start (providing full navigation through the
-program with needing to restart the terminal)
+user to enter a valid option (program to loop until a valid option is entered). Finally, the user is then prompted with the choice of viewing more cars or returning to the start (providing full navigation through the
+program without needing to restart the whole terminal)
 
 - Once an entry is entered via the Staff Section, this should then be displayed in the relevant filter on this
 section, as the new data will be pulled through via the API
@@ -122,5 +126,61 @@ specifically set to a value. It is now set to 20, so if there is 20 rows of data
 - Freshly inputted data not available to view without closing and restarting terminal - code source found
 to restart program internally without breaking the terminal, custom code edited to suit change so program
 not flows nicely, and allows user to return to the customer section and review their inputted data.
+
+## Credits
+
+- Slack - Community of like-minded students to bounce ideas off
+- Reuben Ferante - CI Mentor for project reviews and improvement ideas
+- DaniWeb - Sourced code for a function within program
+- PatorJK - ASCII Art source
+
+## Deployment
+
+### My project deployment
+
+- This project is Deployed via Heroku
+- My project was created in Gitpod
+- Git was used for Version Control
+- My project was deployed once I had completed the majority of manual testing.
+
+### Deploying Via Heroku
+
+- You will require an account to access Heroku
+- On the dashboard click "New" and then "Create New App"
+- Assign your app a relative name and choose your appropriate region
+- Create App
+- Access setting from the tabs bar, central to the screen
+- Reveal Config Vars
+- Add the following - PORT : 8000 / CREDS : {your creds file e.g google sheet creds file}
+- Now "Add Buildpack"
+- It is imperative you add "Python" first, and then "nodejs" then click save.
+- Now access the Deploy section on the main tabs bar
+- Select Github (in this case) then Connect to Github
+- Gain access to your GitHub account and search for the relevant repo you wish to deploy.
+- You can now choose to Enable Automatic Deploys (recommended), this will then deploy your changes
+once you have pushed to github. Otherwise it will mean manually deploying the project each time,
+the choice is yours but for ease of development, automatic would be recommened for an non-industry project.
+- The site will then provide feedback your app has been deployed and you can open it, if you wish.
+- Tutorials can be found online e.g [Heroku Deployment Tutorial](https://youtu.be/KD9OaryS1Kw)
+
+### Forking a Repository
+
+- Forking is a good utility to use to make a copy of an original repository so that this can be edited without making any changed to the original development repository.
+
+- Locate a repository you wish to copy
+
+- The Fork button is above the repository control bar to the right.
+
+- Once clicked this will then create the repository copy to your Github account.
+
+### Cloning a Repository
+
+- You can clone a repository straight to Gitpod if needed.
+
+- Locate a repository you wish to clone
+
+- Just below the repository control bar, there is a green Gitpod button.
+
+- This will then open the project in Gitpod for you (if gitpod is installed).
 
 

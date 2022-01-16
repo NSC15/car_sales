@@ -176,6 +176,9 @@ Make | Model | Variant | Colour | Engine | Condition | Price""", "green"))
         mitsubishi.append_row(stock_addition)
     elif "mazda" in stock_addition:
         mazda.append_row(stock_addition)
+    else:
+        print(colored("Invalid manufacturer...", "red"))
+        print(colored("No data added", "red"))
     staff_multiple_entry()
 
 # ------- Staff Section / Continuation (Enter another or return)--------
@@ -221,7 +224,7 @@ def validate_return_staff(staff_choice):
 
 
 def restart_program():
-    """Restarts the terminal so freshly entered data is 
+    """Restarts the terminal so freshly entered data is
     available to view by the user
     Credit - DaniWeb"""
     python = sys.executable
@@ -229,4 +232,3 @@ def restart_program():
 
 
 get_user_details()
-

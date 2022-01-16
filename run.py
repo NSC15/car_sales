@@ -227,7 +227,7 @@ def validate_return_staff(staff_choice):
 def restart_program():
     """Restarts the terminal so freshly entered data is
     available to view by the user
-    Credit - DaniWeb"""
+    Credit - DaniWeb Sourced Code"""
     python = sys.executable
     os.execl(python, python, * sys.argv)
 

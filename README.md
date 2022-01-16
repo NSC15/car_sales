@@ -100,7 +100,7 @@ check for the correct amount of entries to stop missing data being added. If the
 - Extensive filtering (by engine / price for example)
 - Larger database to hold any make of car
 
-## Back-End Data Source
+## Data Model
 
 - I have used a Google sheet and linked my program to read / write data.
 

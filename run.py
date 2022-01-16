@@ -1,3 +1,5 @@
+import sys
+import os
 import re
 from termcolor import colored
 from constants import (PASSWORD, honda, toyota, subaru, mitsubishi, mazda,
@@ -210,12 +212,21 @@ def validate_return_staff(staff_choice):
         if staff_choice == 1:
             new_car_stock()
         elif staff_choice == 2:
-            print(colored("\n...logging out", "red"))
-            get_user_details()
+            print(colored("\n...Restarting Program, Please Wait", "red"))
+            restart_program()
         elif staff_choice != 1 or 2:
             print(colored("\nYou entered an incorrect option...", "red"))
             return False
     return True
 
 
+def restart_program():
+    """Restarts the terminal so freshly entered data is 
+    available to view by the user
+    Credit - DaniWeb"""
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
+
 get_user_details()
+

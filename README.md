@@ -94,7 +94,6 @@ check for the correct amount of enteries to stop missing data being added.
 
 - Extensive filtering (by engine / price)
 - Larger database to hold any make of car
-- Automatic updating of data (Currently terminal requires restarting to see a new entry)
 
 ## Back-End Data Source
 
@@ -114,5 +113,14 @@ check for the correct amount of enteries to stop missing data being added.
 - Testing completed after each function was coded to maintain working code, and identify bugs early in able to fix efficiently.
 - Responsive testing not needed in this project as app is targeted at desktop users only. However, app does work in multiple browsers
 tested in Google Chrome and Mozilla FireFox.
+
+## Bugs
+
+- API car filter only displaying five rows of data - As standard .head() function only prints 5 rows of data unless
+specifically set to a value. It is now set to 20, so if there is 20 rows of data this will display them all.
+- Program crashing out at customer section when user gets chance to view another car or exit, if a user was to enter an invalid input instead of 1 or 2. Fix was to integrate a try / except to convert the input into an integer and if not, to raise a valueerror and return to the main section.
+- Freshly inputted data not available to view without closing and restarting terminal - code source found
+to restart program internally without breaking the terminal, custom code edited to suit change so program
+not flows nicely, and allows user to return to the customer section and review their inputted data.
 
 

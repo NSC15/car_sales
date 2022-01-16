@@ -19,12 +19,12 @@ mitsubishi = SHEET.worksheet("Mitsubishi")
 mazda = SHEET.worksheet("Mazda")
 PASSWORD = "carsales"
 
+
 dfhonda = pd.DataFrame(honda.get_all_records())
 dftoyota = pd.DataFrame(toyota.get_all_records())
 dfsubaru = pd.DataFrame(subaru.get_all_records())
 dfmitsubishi = pd.DataFrame(mitsubishi.get_all_records())
 dfmazda = pd.DataFrame(mazda.get_all_records())
-
 car_to_dataframe_mapper = {
     1: dfhonda, 2: dftoyota, 3: dfsubaru, 4: dfmitsubishi, 5: dfmazda
 }

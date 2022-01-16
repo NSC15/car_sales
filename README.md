@@ -138,7 +138,7 @@ acceptable for the visual benefits they create to the final product.
 
 - Slack - Community of like-minded students to bounce ideas off
 - Reuben Ferante - CI Mentor for project reviews and improvement ideas
-- DaniWeb - Sourced code for a function within development.
+- DaniWeb - Sourced code for a function within development. [Link to Code Source](https://www.daniweb.com/programming/software-development/code/260268/restart-your-python-program)
 - PatorJK - ASCII Art source
 
 ## Deployment

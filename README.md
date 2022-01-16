@@ -116,9 +116,10 @@ check for the correct amount of entries to stop missing data being added. If the
 
 ## Testing
 
-- Auto Testing - Completed by PEP8, returned with no errors
+- Auto Testing via Validator - Completed by PEP8, returned with no errors
 - Manual Testing - Manual testing completed in development stages as well as on the deployed version.
 - Testing completed after each function was created to maintain working code, and identify bugs early in able to fix efficiently.
+- Data Validation Testing - inputted incorrect options to test error handling was functioning correctly
 - Responsive testing not needed in this project as app is targeted at desktop users only. However, app does work in multiple browsers.
 - Manually tested in Google Chrome and Mozilla FireFox.
 

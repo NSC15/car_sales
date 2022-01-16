@@ -130,6 +130,8 @@ specifically set to a value. It is now set to 20, so if there is 20 rows of data
 - Freshly inputted data not available to view without closing and restarting terminal - code source found
 to restart program internally without breaking the terminal, custom code edited to suit change so program
 now flows properly, and allows user to return to the customer section and review their inputted data.
+- Several advisory problems with the ASCII art addition on run.py, however these have no detrimental effect to the program so as a result these have been
+acceptable for the visual benefits they create to the final product.
 
 ## Credits
 
